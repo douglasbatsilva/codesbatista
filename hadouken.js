@@ -75,20 +75,55 @@ const families = [
   },
 ];
 
-families.forEach((family) => {
-  if (family.name === "Ferreira" && family.city === "São Paulo") {
-    const members = family.members;
-    members.forEach((member) => {
-      if (member.age > 64 && member.vehicles.length > 1) {
-        const vehicles = member.vehicles;
-        vehicles.forEach((vehicle) => {
-          if (vehicle.brand === "Fiat" && vehicle.model === "Siena") {
-            console.log(
-              `${member.name} is driving a ${vehicle.brand} ${vehicle.model}`
-            );
-          }
-        });
-      }
-    });
-  }
-});
+// Código Hadouken Gigantesco
+
+// families.forEach((family) => {
+//   if (family.name === "Ferreira" && family.city === "São Paulo") {
+//     const members = family.members;
+//     members.forEach((member) => {
+//       if (member.age > 64 && member.vehicles.length > 1) {
+//         const vehicles = member.vehicles;
+//         vehicles.forEach((vehicle) => {
+//           if (vehicle.brand === "Fiat" && vehicle.model === "Siena") {
+//             console.log(
+//               `${member.name} is driving a ${vehicle.brand} ${vehicle.model}`
+//             );
+//           }
+//         });
+//       }
+//     });
+//   }
+// });
+
+
+
+// Código Separado por métodos
+
+function searchASpecificMember(families){
+  return families.forEach((family) => {
+    if (family.name === "Ferreira" && family.city === "São Paulo") {
+      searchWithinEachMember(family.members);
+    }
+  });
+}
+
+function searchWithinEachMember(members){
+  return members.forEach((member) => {
+    if (member.age > 64 && member.vehicles.length > 1) {
+      searchWithinEachVehicle(member);
+    }
+  });
+}
+
+function searchWithinEachVehicle(member){
+  const { vehicles } = member;
+  return vehicles.forEach((vehicle) => {
+    if (vehicle.brand === "Fiat" && vehicle.model === "Siena") {
+      console.log(
+        `${member.name} is driving a ${vehicle.brand} ${vehicle.model}`
+      );
+    }
+  });
+}
+
+searchASpecificMember(families);
